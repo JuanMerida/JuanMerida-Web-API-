@@ -78,8 +78,10 @@ app.MapPut("/usuario/{id}", (int id, [FromBody] Usuario usuarioActualizado) =>
 })
 .WithTags("usuario");
 
-app.MapDelete("/usuario", ([FromQuery] int Id) =>
-{
+
+
+
+app.MapDelete("/usuario/{id}", ([FromQuery] int Id) =>{
     var usuarioAEliminar = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == Id);
     if (usuarioAEliminar != null)
     {
@@ -189,5 +191,35 @@ app.MapDelete("/rol/{id}", ([FromQuery] int Id) =>
     }
 })
     .WithTags("rol");
+
+
+    app.MapPost("/rol/{idRol}/usuario/{idUsuario}", (int idUsuario, int idRol) =>{
+    var usuario = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == idUsuario);
+    var rol = roles.FirstOrDefault(rol => rol.IdRol == idRol);
+
+    if (rol != null &&  usuario!= null)
+    {
+        rol.Usuarios.Add(usuario);
+        return Results.Ok();
+    }
+
+    return Results.NotFound();
+
+})
+.WithTags("rol");
+
+
+app.MapDelete("/rol/{idRol}/usuario/{idUsuario}",(int idUsuario, int idRol) =>{
+    var usuario = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == idUsuario);
+    var rol = roles.FirstOrDefault(rol => rol.IdRol == idRol);
+
+    if (rol != null &&  usuario!= null)
+    {
+         rol.Usuarios.Remove(usuario);
+        return Results.Ok();
+    }
+
+    return Results.NotFound();
+}).WithTags("rol");
 
 app.Run();
