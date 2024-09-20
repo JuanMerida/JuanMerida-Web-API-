@@ -59,9 +59,15 @@ app.MapGet("/usuario/{id}", (int id) =>
     }
     return Results.Ok(usuario);
 })
+<<<<<<< HEAD
 .WithTags("usuario");
 
 
+=======
+    .WithTags("usuario");
+
+    
+>>>>>>> 355df91eda4e0368c2b6070195978d4533c0ca26
 app.MapPut("/usuario/{id}", (int id, [FromBody] Usuario usuarioActualizado) =>
 {
     var usuarioAActualizar = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == id);
@@ -80,12 +86,18 @@ app.MapPut("/usuario/{id}", (int id, [FromBody] Usuario usuarioActualizado) =>
 .WithTags("usuario");
 
 
+<<<<<<< HEAD
 app.MapDelete("/usuario/{id}", ([FromQuery] int Id) =>
+=======
+
+app.MapDelete("/usuario", ([FromQuery] int Id) =>
+>>>>>>> 355df91eda4e0368c2b6070195978d4533c0ca26
 {
     var usuarioAEliminar = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == Id);
     if (usuarioAEliminar != null)
     {
         usuarios.Remove(usuarioAEliminar);
+<<<<<<< HEAD
         return Results.NoContent(); 
     }
     else
@@ -183,6 +195,8 @@ app.MapDelete("/rol/{id}", ([FromQuery] int Id) =>
     if (rolAEliminar != null)
     {
         roles.Remove(rolAEliminar);
+=======
+>>>>>>> 355df91eda4e0368c2b6070195978d4533c0ca26
         return Results.NoContent(); //Codigo 200
     }
     else
@@ -190,10 +204,14 @@ app.MapDelete("/rol/{id}", ([FromQuery] int Id) =>
         return Results.NotFound(); //Codigo 404
     }
 })
+<<<<<<< HEAD
     .WithTags("rol");
 
 
 
+=======
+    .WithTags("usuario");
+>>>>>>> 355df91eda4e0368c2b6070195978d4533c0ca26
 
 
 app.Run();
