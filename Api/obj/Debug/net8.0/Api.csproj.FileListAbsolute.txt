@@ -32,3 +32,14 @@
 /mnt/Datos/Repos/JuanMerida-Web-API-/Api/obj/Debug/net8.0/Api.pdb
 /mnt/Datos/Repos/JuanMerida-Web-API-/Api/obj/Debug/net8.0/Api.genruntimeconfig.cache
 /mnt/Datos/Repos/JuanMerida-Web-API-/Api/obj/Debug/net8.0/ref/Api.dll
+C:\Users\Lab15-PC01\Documents\GitHub\JuanMerida-Web-API-\Api\obj\Debug\net8.0\Api.csproj.AssemblyReference.cache
+C:\Users\Lab15-PC01\Documents\GitHub\JuanMerida-Web-API-\Api\obj\Debug\net8.0\Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lab15-PC01\Documents\GitHub\JuanMerida-Web-API-\Api\obj\Debug\net8.0\Api.AssemblyInfoInputs.cache
+C:\Users\Lab15-PC01\Documents\GitHub\JuanMerida-Web-API-\Api\obj\Debug\net8.0\Api.AssemblyInfo.cs
+C:\Users\Lab15-PC01\Documents\GitHub\JuanMerida-Web-API-\Api\obj\Debug\net8.0\Api.csproj.CoreCompileInputs.cache
+C:\Users\Lab15-PC01\Documents\GitHub\JuanMerida-Web-API-\Api\obj\Debug\net8.0\Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Lab15-PC01\Documents\GitHub\JuanMerida-Web-API-\Api\obj\Debug\net8.0\Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Lab15-PC01\Documents\GitHub\JuanMerida-Web-API-\Api\obj\Debug\net8.0\Api.sourcelink.json
+C:\Users\Lab15-PC01\Documents\GitHub\JuanMerida-Web-API-\Api\obj\Debug\net8.0\Api.dll
+C:\Users\Lab15-PC01\Documents\GitHub\JuanMerida-Web-API-\Api\obj\Debug\net8.0\refint\Api.dll
+C:\Users\Lab15-PC01\Documents\GitHub\JuanMerida-Web-API-\Api\obj\Debug\net8.0\Api.pdb
