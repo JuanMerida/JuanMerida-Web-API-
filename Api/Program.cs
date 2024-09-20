@@ -44,5 +44,42 @@ app.MapGet("/usuario", (int id) =>
     }
     return Results.Ok(usuario);
 })
-    .WithTags("Alumno");
+    .WithTags("usuario");
+
+    
+app.MapPut("/usuario/{id}", (int id, [FromBody] Usuario usuarioActualizado) =>
+{
+    var usuarioAActualizar = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == id);
+
+    if (usuarioAActualizar == null)
+    {
+        return Results.NotFound($"Usuario con ID {id} no encontrado.");
+    }
+    if (!string.IsNullOrWhiteSpace(usuarioActualizado.Nombre))
+    {
+        return Results.BadRequest("No se puede modificar el nombre del usuario.");
+    }
+    usuarioAActualizar.Habilitado = usuarioActualizado.Habilitado;
+    return Results.NoContent();
+})
+.WithTags("usuario");
+
+
+
+app.MapDelete("/usuario", ([FromQuery] int Id) =>
+{
+    var usuarioAEliminar = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == Id);
+    if (usuarioAEliminar != null)
+    {
+        usuarios.Remove(usuarioAEliminar);
+        return Results.NoContent(); //Codigo 200
+    }
+    else
+    {
+        return Results.NotFound(); //Codigo 404
+    }
+})
+    .WithTags("usuario");
+
+
 app.Run();
