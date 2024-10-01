@@ -61,25 +61,29 @@ app.MapGet("/usuario/{id}", (int id) =>
 }).WithTags("usuario");
 
 
-app.MapPut("/usuario/{id}", (int id, [FromBody] Usuario usuarioActualizado) =>
+app.MapPut("/usuario/{id}", (int id, [FromBody] Usuario usuario) =>
 {
     var usuarioAActualizar = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == id);
-
+    if (usuarioAActualizar != null)
+    {
+        usuarioAActualizar.Email = usuario.Email;
+        usuarioAActualizar.usuario=usuarioAActualizar.usuario;
+        usuarioAActualizar.Contraseña=usuario.Contraseña;
+        return Results.Ok(usuarios); 
+    }
+    
     if (usuarioAActualizar == null)
     {
         return Results.NotFound($"Usuario con ID {id} no encontrado.");
     }
-    if (!string.IsNullOrWhiteSpace(usuarioActualizado.Nombre))
+    if (!string.IsNullOrWhiteSpace(usuario.Nombre))
     {
         return Results.BadRequest("No se puede modificar el nombre del usuario.");
     }
-    usuarioAActualizar.Habilitado = usuarioActualizado.Habilitado;
+    usuarioAActualizar.Habilitado = usuario.Habilitado;
     return Results.NoContent();
 })
 .WithTags("usuario");
-
-
-
 
 app.MapDelete("/usuario/{id}", ([FromQuery] int Id) =>{
     var usuarioAEliminar = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == Id);
@@ -162,7 +166,6 @@ app.MapGet("/rol/{id}", (int id) =>
 app.MapPut("/rol/{id}", (int id, [FromBody] Rol rolActualizado) =>
 {
     var rolAActualizar = roles.FirstOrDefault(rol => rol.IdRol == id);
-
     if (rolAActualizar == null)
     {
         return Results.NotFound($"Usuario con ID {id} no encontrado.");
@@ -215,7 +218,7 @@ app.MapDelete("/rol/{idRol}/usuario/{idUsuario}",(int idUsuario, int idRol) =>{
 
     if (rol != null &&  usuario!= null)
     {
-         rol.Usuarios.Remove(usuario);
+        rol.Usuarios.Remove(usuario);
         return Results.Ok();
     }
 
