@@ -1,4 +1,10 @@
-namespace Api;
+using System;
+using  System.Collections.Generic;
+
+
+namespace Api.Models;
+
+
 
 public class Usuario{
     public int IdUsuario {get; set;}
