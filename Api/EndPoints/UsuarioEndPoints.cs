@@ -20,15 +20,13 @@ app.MapPost("/usuario", ([FromBody] Usuario usuario) =>
     }
     usuarios.Add(usuario);
     return Results.Created($"/usuario/{usuario.IdUsuario}", usuario);
-})
-    .WithTags("usuario");
+});
 
 
 app.MapGet("/usuarios", () =>
 {
     return Results.Ok(usuarios);
-})
-.WithTags("usuario");
+});
 
 
 app.MapGet("/usuario/{id}", (int id) =>
@@ -40,7 +38,7 @@ app.MapGet("/usuario/{id}", (int id) =>
         return Results.NotFound($"Usuario con ID {id} no encontrado.");
     }
     return Results.Ok(usuario);
-}).WithTags("usuario");
+});
 
 
 app.MapPut("/usuario/{id}", (int id, [FromBody] Usuario usuario) =>
@@ -64,8 +62,7 @@ app.MapPut("/usuario/{id}", (int id, [FromBody] Usuario usuario) =>
     }
     usuarioAActualizar.Habilitado = usuario.Habilitado;
     return Results.NoContent();
-})
-.WithTags("usuario");
+});
 
 app.MapDelete("/usuario/{id}", ([FromQuery] int Id) =>{
     var usuarioAEliminar = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == Id);
@@ -78,8 +75,7 @@ app.MapDelete("/usuario/{id}", ([FromQuery] int Id) =>{
     {
         return Results.NotFound(); 
     }
-})
-    .WithTags("usuario");
+});
     
     return app;
     }

@@ -1,4 +1,6 @@
 using Api;
+using Api.Models;
+using Api.EndPoints;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,142 +16,72 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options => options.EnableTryItOutByDefault());
 }
 
 
+app.MapGroup("/api")
+    .MapUsuarioEndPoints()
+    .WithTags("usuario");
 
-List<Rol> roles = [
-    new Rol{ IdRol=1, Nombre="Estudiante"},
-    new Rol{ IdRol=2, Nombre="Profesor"}
-    ];
-
-
-
-
-app.MapPost("/usuario/{idUsuario}/rol/{idRol}", (int idUsuario, int idRol) =>{
-    var usuario = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == idUsuario);
-    var rol = roles.FirstOrDefault(rol => rol.IdRol == idRol);
-
-    if (rol != null &&  usuario!= null)
-    {
-        usuario.Roles.Add(rol);
-        return Results.Ok();
-    }
-
-    return Results.NotFound();
-
-})
-.WithTags("usuario");
-
-
-app.MapDelete("/usuario/{idUsuario}/rol/{idRol}",(int idUsuario, int idRol) =>{
-    var usuario = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == idUsuario);
-    var rol = roles.FirstOrDefault(rol => rol.IdRol == idRol);
-
-    if (rol != null &&  usuario!= null)
-    {
-        usuario.Roles.Remove(rol);
-        return Results.Ok();
-    }
-
-    return Results.NotFound();
-}).WithTags("usuario");
-
-
-//Rol
-
-app.MapPost("/rol", ([FromBody] Rol rol) =>
-{
-
-    if (string.IsNullOrWhiteSpace(rol.Nombre))
-    {
-        return Results.BadRequest("El nombre del usuario no puede ser vacío o nulo.");
-    }
-    roles.Add(rol);
-    return Results.Created($"/usuario/{rol.IdRol}", rol);
-})
+app.MapGroup("/api")
+    .MapRolEndPoints()
     .WithTags("rol");
 
-app.MapGet("/roles", () =>
-{
-    return Results.Ok(roles);
-})
-.WithTags("rol");
+// app.MapPost("/usuario/{idUsuario}/rol/{idRol}", (int idUsuario, int idRol) =>{
+//     var usuario = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == idUsuario);
+//     var rol = roles.FirstOrDefault(rol => rol.IdRol == idRol);
 
-app.MapGet("/rol/{id}", (int id) =>
-{
-    var rol = roles.FirstOrDefault(rol => rol.IdRol == id);
+//     if (rol != null &&  usuario!= null)
+//     {
+//         usuario.Roles.Add(rol);
+//         return Results.Ok();
+//     }
 
-    if (rol == null)
-    {
-        return Results.NotFound($"Usuario con ID {id} no encontrado.");
-    }
-    return Results.Ok(rol);
-})
-.WithTags("rol");
+//     return Results.NotFound();
 
+// })
+// .WithTags("usuario");
 
-app.MapPut("/rol/{id}", (int id, [FromBody] Rol rolActualizado) =>
-{
-    var rolAActualizar = roles.FirstOrDefault(rol => rol.IdRol == id);
-    if (rolAActualizar == null)
-    {
-        return Results.NotFound($"Usuario con ID {id} no encontrado.");
-    }
-    if (!string.IsNullOrWhiteSpace(rolAActualizar.Nombre))
-    {
-        return Results.BadRequest("No se puede modificar el nombre del usuario.");
-    }
-    rolAActualizar.Habilitado = rolAActualizar.Habilitado;
-    return Results.NoContent();
-})
-.WithTags("rol");
+// app.MapDelete("/usuario/{idUsuario}/rol/{idRol}",(int idUsuario, int idRol) =>{
+//     var usuario = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == idUsuario);
+//     var rol = roles.FirstOrDefault(rol => rol.IdRol == idRol);
 
+//     if (rol != null &&  usuario!= null)
+//     {
+//         usuario.Roles.Remove(rol);
+//         return Results.Ok();
+//     }
 
-app.MapDelete("/rol/{id}", ([FromQuery] int Id) =>
-{
-    var rolAEliminar = roles.FirstOrDefault(rol => rol.IdRol == Id);
-    if (rolAEliminar != null)
-    {
-        roles.Remove(rolAEliminar);
-        return Results.NoContent(); //Codigo 200
-    }
-    else
-    {
-        return Results.NotFound(); //Codigo 404
-    }
-})
-    .WithTags("rol");
+//     return Results.NotFound();
+// }).WithTags("usuario");
 
+//     app.MapPost("/rol/{idRol}/usuario/{idUsuario}", (int idUsuario, int idRol) =>{
+//     var usuario = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == idUsuario);
+//     var rol = roles.FirstOrDefault(rol => rol.IdRol == idRol);
 
-    app.MapPost("/rol/{idRol}/usuario/{idUsuario}", (int idUsuario, int idRol) =>{
-    var usuario = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == idUsuario);
-    var rol = roles.FirstOrDefault(rol => rol.IdRol == idRol);
+//     if (rol != null &&  usuario!= null)
+//     {
+//         rol.Usuarios.Add(usuario);
+//         return Results.Ok();
+//     }
 
-    if (rol != null &&  usuario!= null)
-    {
-        rol.Usuarios.Add(usuario);
-        return Results.Ok();
-    }
+//     return Results.NotFound();
 
-    return Results.NotFound();
+// })
+// .WithTags("rol");
 
-})
-.WithTags("rol");
+// app.MapDelete("/rol/{idRol}/usuario/{idUsuario}",(int idUsuario, int idRol) =>{
+//     var usuario = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == idUsuario);
+//     var rol = roles.FirstOrDefault(rol => rol.IdRol == idRol);
 
+//     if (rol != null &&  usuario!= null)
+//     {
+//         rol.Usuarios.Remove(usuario);
+//         return Results.Ok();
+//     }
 
-app.MapDelete("/rol/{idRol}/usuario/{idUsuario}",(int idUsuario, int idRol) =>{
-    var usuario = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == idUsuario);
-    var rol = roles.FirstOrDefault(rol => rol.IdRol == idRol);
-
-    if (rol != null &&  usuario!= null)
-    {
-        rol.Usuarios.Remove(usuario);
-        return Results.Ok();
-    }
-
-    return Results.NotFound();
-}).WithTags("rol");
+//     return Results.NotFound();
+// }).WithTags("rol");
 
 app.Run();
