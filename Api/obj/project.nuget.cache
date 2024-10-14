@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "qbMw33nBVLH8P8JY3IEVnZgXFa9rDfH7Bhy6j/9w8M/avmues6ReP7L31QmbxiEYd1LxpKtEBKdG13OEcbKeng==",
+  "dgSpecHash": "m+is9mUpRaPxjaWyU8HM8ZCYDezTqzu12S9y3qKuw2hJF57MRuNXtDLFFwaYx4+nJtlFMtxZ72PS2w3Hws9q1g==",
   "success": true,
   "projectFilePath": "/mnt/Datos/Repos/JuanMerida-Web-API-/Api/Api.csproj",
   "expectedPackageFiles": [
@@ -32,6 +32,8 @@
     "/home/et12alumno/.nuget/packages/microsoft.openapi/1.4.3/microsoft.openapi.1.4.3.nupkg.sha512",
     "/home/et12alumno/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
     "/home/et12alumno/.nuget/packages/mysqlconnector/2.3.5/mysqlconnector.2.3.5.nupkg.sha512",
+    "/home/et12alumno/.nuget/packages/npgsql/8.0.4/npgsql.8.0.4.nupkg.sha512",
+    "/home/et12alumno/.nuget/packages/npgsql.entityframeworkcore.postgresql/8.0.8/npgsql.entityframeworkcore.postgresql.8.0.8.nupkg.sha512",
     "/home/et12alumno/.nuget/packages/pomelo.entityframeworkcore.mysql/8.0.2/pomelo.entityframeworkcore.mysql.8.0.2.nupkg.sha512",
     "/home/et12alumno/.nuget/packages/swashbuckle.aspnetcore/6.4.0/swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "/home/et12alumno/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
