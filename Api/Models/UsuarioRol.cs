@@ -5,13 +5,13 @@ namespace Api.Models;
 
 public partial class UsuarioRol
 {
-    public int IdUsuarioRol { get; set; }
+    public int Idusuariorol { get; set; }
 
-    public int IdUsuario { get; set; }
+    public int? Idusuario { get; set; }
 
-    public int IdRol { get; set; }
+    public int? Idrol { get; set; }
 
-    public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+    public virtual Rol? IdrolNavigation { get; set; }
 
-    public virtual Rol IdRolNavigation { get; set; } = null!;
+    public virtual Usuario? IdusuarioNavigation { get; set; }
 }

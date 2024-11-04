@@ -6,9 +6,9 @@ namespace Api.EndPoints;
 public static class UsuarioEndPoints{
     public static RouteGroupBuilder MapUsuarioEndPoints(this RouteGroupBuilder app){
         List<Usuario> usuarios = [
-    new Usuario {IdUsuario = 1, Nombre = "Lucas" , Email = "lucas12@gmail.com", usuario = "lucardio", Contraseña ="1234"},
-    new Usuario {IdUsuario = 2, Nombre = "Nahuel" , Email = "nahuel142@gmail.com", usuario = "Nahuel", Contraseña ="1223"},
-    new Usuario {IdUsuario = 3, Nombre = "Joel",  Email = "joel14@gmail.com", usuario = "Joel", Contraseña ="12"}];
+    new Usuario {Idusuario = 1, Nombre = "Lucas" , Email = "lucas12@gmail.com", Usuario1 = "lucardio", Contraseña ="1234"},
+    new Usuario {Idusuario = 2, Nombre = "Nahuel" , Email = "nahuel142@gmail.com", Usuario1 = "Nahuel", Contraseña ="1223"},
+    new Usuario {Idusuario = 3, Nombre = "Joel",  Email = "joel14@gmail.com", Usuario1 = "Joel", Contraseña ="12"}];
 
     //Usuario
 app.MapPost("/usuario", ([FromBody] Usuario usuario) =>
@@ -19,7 +19,7 @@ app.MapPost("/usuario", ([FromBody] Usuario usuario) =>
         return Results.BadRequest("El nombre del usuario no puede ser vacío o nulo.");
     }
     usuarios.Add(usuario);
-    return Results.Created($"/usuario/{usuario.IdUsuario}", usuario);
+    return Results.Created($"/usuario/{usuario.Idusuario}", usuario);
 });
 
 
@@ -31,7 +31,7 @@ app.MapGet("/usuarios", () =>
 
 app.MapGet("/usuario/{id}", (int id) =>
 {
-    var usuario = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == id);
+    var usuario = usuarios.FirstOrDefault(usuario => usuario.Idusuario == id);
 
     if (usuario == null)
     {
@@ -43,11 +43,11 @@ app.MapGet("/usuario/{id}", (int id) =>
 
 app.MapPut("/usuario/{id}", (int id, [FromBody] Usuario usuario) =>
 {
-    var usuarioAActualizar = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == id);
+    var usuarioAActualizar = usuarios.FirstOrDefault(usuario => usuario.Idusuario == id);
     if (usuarioAActualizar != null)
     {
         usuarioAActualizar.Email = usuario.Email;
-        usuarioAActualizar.usuario=usuarioAActualizar.usuario;
+        usuarioAActualizar.Usuario1=usuarioAActualizar.Usuario1;
         usuarioAActualizar.Contraseña=usuario.Contraseña;
         return Results.Ok(usuarios); 
     }
@@ -65,7 +65,7 @@ app.MapPut("/usuario/{id}", (int id, [FromBody] Usuario usuario) =>
 });
 
 app.MapDelete("/usuario/{id}", ([FromQuery] int Id) =>{
-    var usuarioAEliminar = usuarios.FirstOrDefault(usuario => usuario.IdUsuario == Id);
+    var usuarioAEliminar = usuarios.FirstOrDefault(usuario => usuario.Idusuario == Id);
     if (usuarioAEliminar != null)
     {
         usuarios.Remove(usuarioAEliminar);

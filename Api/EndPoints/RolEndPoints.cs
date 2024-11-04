@@ -7,8 +7,8 @@ public static class RolEndPoints
 {
     public static RouteGroupBuilder MapRolEndPoints(this RouteGroupBuilder app){
     List<Rol> roles = [
-    new Rol{ IdRol=1, Nombre="Estudiante"},
-    new Rol{ IdRol=2, Nombre="Profesor"}
+    new Rol{ Idrol=1, Nombre="Estudiante"},
+    new Rol{ Idrol=2, Nombre="Profesor"}
     ];
     
     //Rol
@@ -21,7 +21,7 @@ app.MapPost("/rol", ([FromBody] Rol rol) =>
         return Results.BadRequest("El nombre del usuario no puede ser vacío o nulo.");
     }
     roles.Add(rol);
-    return Results.Created($"/usuario/{rol.IdRol}", rol);
+    return Results.Created($"/usuario/{rol.Idrol}", rol);
 })
     .WithTags("rol");
 
@@ -33,7 +33,7 @@ app.MapGet("/roles", () =>
 
 app.MapGet("/rol/{id}", (int id) =>
 {
-    var rol = roles.FirstOrDefault(rol => rol.IdRol == id);
+    var rol = roles.FirstOrDefault(rol => rol.Idrol == id);
 
     if (rol == null)
     {
@@ -45,7 +45,7 @@ app.MapGet("/rol/{id}", (int id) =>
 
 app.MapPut("/rol/{id}", (int id, [FromBody] Rol rolActualizado) =>
 {
-    var rolAActualizar = roles.FirstOrDefault(rol => rol.IdRol == id);
+    var rolAActualizar = roles.FirstOrDefault(rol => rol.Idrol == id);
     if (rolAActualizar == null)
     {
         return Results.NotFound($"Usuario con ID {id} no encontrado.");
@@ -61,7 +61,7 @@ app.MapPut("/rol/{id}", (int id, [FromBody] Rol rolActualizado) =>
 
 app.MapDelete("/rol/{id}", ([FromQuery] int Id) =>
 {
-    var rolAEliminar = roles.FirstOrDefault(rol => rol.IdRol == Id);
+    var rolAEliminar = roles.FirstOrDefault(rol => rol.Idrol == Id);
     if (rolAEliminar != null)
     {
         roles.Remove(rolAEliminar);
