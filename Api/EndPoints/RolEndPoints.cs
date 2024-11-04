@@ -6,46 +6,48 @@ namespace Api.EndPoints;
 public static class RolEndPoints
 {
     public static RouteGroupBuilder MapRolEndPoints(this RouteGroupBuilder app){
-    List<Rol> roles = [
-    new Rol{ Idrol=1, Nombre="Estudiante"},
-    new Rol{ Idrol=2, Nombre="Profesor"}
-    ];
+    // List<Rol> roles = [
+    // new Rol{ Idrol=1, Nombre="Estudiante"},
+    // new Rol{ Idrol=2, Nombre="Profesor"}
+    // ];
     
     //Rol
 
-app.MapPost("/rol", ([FromBody] Rol rol) =>
+app.MapPost("/rol", ([FromBody] Rol rol, EscuelaContext context) =>
 {
 
     if (string.IsNullOrWhiteSpace(rol.Nombre))
     {
         return Results.BadRequest("El nombre del usuario no puede ser vacío o nulo.");
     }
-    roles.Add(rol);
+    context.Rols.Add(rol);
+    context.SaveChanges();
     return Results.Created($"/usuario/{rol.Idrol}", rol);
 })
     .WithTags("rol");
 
-app.MapGet("/roles", () =>
+app.MapGet("/roles", (EscuelaContext context) =>
 {
-    return Results.Ok(roles);
-})
-.WithTags("rol");
+    return Results.Ok(context.Rols);
+    
+});
 
-app.MapGet("/rol/{id}", (int id) =>
+app.MapGet("/rol/{id}", (int id, EscuelaContext context) =>
 {
-    var rol = roles.FirstOrDefault(rol => rol.Idrol == id);
+    var rol = context.Rols.FirstOrDefault(rol => rol.Idrol == id);
 
     if (rol == null)
     {
         return Results.NotFound($"Usuario con ID {id} no encontrado.");
     }
+    context.SaveChanges();
     return Results.Ok(rol);
 });
 
 
-app.MapPut("/rol/{id}", (int id, [FromBody] Rol rolActualizado) =>
+app.MapPut("/rol/{id}", (int id, [FromBody] Rol rolActualizado , EscuelaContext context) =>
 {
-    var rolAActualizar = roles.FirstOrDefault(rol => rol.Idrol == id);
+    var rolAActualizar = context.Rols.FirstOrDefault(rol => rol.Idrol == id);
     if (rolAActualizar == null)
     {
         return Results.NotFound($"Usuario con ID {id} no encontrado.");
@@ -55,16 +57,18 @@ app.MapPut("/rol/{id}", (int id, [FromBody] Rol rolActualizado) =>
         return Results.BadRequest("No se puede modificar el nombre del usuario.");
     }
     rolAActualizar.Habilitado = rolAActualizar.Habilitado;
+    context.SaveChanges();
     return Results.NoContent();
 });
 
 
-app.MapDelete("/rol/{id}", ([FromQuery] int Id) =>
+app.MapDelete("/rol/{id}", ([FromQuery] int Id, EscuelaContext context) =>
 {
-    var rolAEliminar = roles.FirstOrDefault(rol => rol.Idrol == Id);
+    var rolAEliminar = context.Rols.FirstOrDefault(rol => rol.Idrol == Id);
     if (rolAEliminar != null)
     {
-        roles.Remove(rolAEliminar);
+        context.Rols.Remove(rolAEliminar);
+        context.SaveChanges();
         return Results.NoContent(); //Codigo 200
     }
     else
