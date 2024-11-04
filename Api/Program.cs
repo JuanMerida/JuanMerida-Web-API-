@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-string connectionString = builder.Configuration.GetConnectionString("iliana_db");
+string connectionString = builder.Configuration.GetConnectionString("Juan_db");
 
 builder.Services.AddDbContext<EscuelaContext>(options => options.UseNpgsql(connectionString));
 
