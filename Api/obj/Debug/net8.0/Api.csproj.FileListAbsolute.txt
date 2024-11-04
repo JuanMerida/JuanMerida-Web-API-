@@ -140,3 +140,9 @@ C:/Users/Lab15-PC01/Documents/GitHub/JuanMerida-Web-API-/Api/obj/Debug/net8.0/re
 /mnt/Datos/Repos/JuanMerida-Web-API-/Api/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /mnt/Datos/Repos/JuanMerida-Web-API-/Api/bin/Debug/net8.0/Npgsql.dll
 /mnt/Datos/Repos/JuanMerida-Web-API-/Api/bin/Debug/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+/mnt/Datos/Repos/JuanMerida-Web-API-/Api/bin/Debug/net8.0/Microsoft.Extensions.Caching.Memory.dll
+/mnt/Datos/Repos/JuanMerida-Web-API-/Api/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.dll
+/mnt/Datos/Repos/JuanMerida-Web-API-/Api/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/mnt/Datos/Repos/JuanMerida-Web-API-/Api/bin/Debug/net8.0/Microsoft.Extensions.Logging.dll
+/mnt/Datos/Repos/JuanMerida-Web-API-/Api/bin/Debug/net8.0/Microsoft.Extensions.Logging.Abstractions.dll
+/mnt/Datos/Repos/JuanMerida-Web-API-/Api/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
